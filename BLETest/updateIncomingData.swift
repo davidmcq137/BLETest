@@ -1,16 +1,15 @@
 //
-//  SceneDelegate.swift
+//  updateIncomingData.swift
 //  BLETest
 //
-//  Created by David Mcqueeney on 1/11/20.
+//  Created by David Mcqueeney on 1/17/20.
 //  Copyright © 2020 David Mcqueeney. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
 import Combine
+import CoreBluetooth
 
-/*
 class Telem: ObservableObject {
     @Published var prevFRM: Double = 0
     @Published var prevAlt: Double = 0
@@ -23,76 +22,8 @@ class Telem: ObservableObject {
     @Published var currentYd: Double = 0
 }
 
-*/
+var icount: Int = 0
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-    var window: UIWindow?
-    
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        print("scene will connect to session")
-        // Get the managed object context from the shared persistent container.
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-        // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
-        // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        let contentView = ContentView().environment(\.managedObjectContext, context)
-
-        tele = Telem()
-        
-        
-        // Use a UIHostingController as window root view controller.
-        if let windowScene = scene as? UIWindowScene {
-            let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(tele))
-            self.window = window
-            window.makeKeyAndVisible()
-        }
-    }
-
-    func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
-        print("scene did disconnect")
-    }
-
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-        print("scene did become active")
-    }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
-        print("scene will resign active")
-    }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
-
-        print("scene will enter foreground")
-    }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
-
-        // Save changes in the application's managed object context when the application transitions to the background.
-        print("scene did enter background")
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-    }
-
-
-}
-/*
 func updateIncomingData () {
     
     ////NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Notify"), object: nil , queue: nil){
@@ -188,54 +119,49 @@ func updateIncomingData () {
 private func readXYP(val: String) {
     var tx: Double
     var ty: Double
-    //print(val)
+
     let xyPos = val.components(separatedBy: "$")
+
     if xyPos.count == 2 {
+
         tx = Double(xyPos[0]) ?? 0.0
         ty = Double(xyPos[1]) ?? 0.0
-        //print(tx,ty)
-            for i in 1 ..< MAXTABLE {
-                xp[i-1] = xp[i]
-                yp[i-1] = yp[i]
-                //    print("i,x,y: \(i), \(xp[i-1]), \(yp[i-1])")
-            }
-            
+
+        tele.currentXd = tx
+        tele.currentYd = ty
+
+        for i in 1 ..< MAXTABLE {
+            xp[i-1] = xp[i]
+            yp[i-1] = yp[i]
+        }
+        
         xp.remove(at: 0)
         yp.remove(at: 0)
         
         xp.append(tx)
         yp.append(ty)
         
-        tele.currentXd = tx
-        tele.currentYd = ty
-        
-        var xx: Double
-        var yy: Double
-        
-        (xx, yy) = XYtoPixel(px: xp.last!, py: yp.last!)
-        
-        let rotationAngle: Double = fslope(x: xp, y: yp, n: MAXTABLE, ymult: -1) // mult -1 since rotation is in pixel space, data in xy space and y is inverted between them
-        heading = rotationAngle * 180.0 / Double.pi
-        
-        computeBezier(numT: MAXBEZIER)
-        //cometBezier.removeAllPoints()
-        
-        for i in 0 ... MAXBEZIER {
-            var bx: Double
-            var by: Double
-            (bx, by) = XYtoPixel(px: Bxp[i], py: Byp[i])
-            if i == 0 || i == MAXBEZIER {  //first point
-                //cometBezier.move(to: CGPoint(x: bx, y: by))
-            } else {
-                //cometBezier.addLine(to: CGPoint(x: bx, y: by))
+        if (currentField != nil) && (currentImageIndex != nil) {
+            let xr = currentField!.images[currentImageIndex!].xrange/2
+            let yr = currentField!.images[currentImageIndex!].xrange/8
+            
+            if (tx > xr) || (tx < -xr) || (ty > 3*yr) || (ty < -yr) {
+                if currentImageIndex! + 1 < currentField!.images.count {
+                    currentImageIndex = currentImageIndex! + 1
+                }
             }
         }
-        //cometLayer.path = cometBezier.cgPath
-        //self.view.layer.addSublayer(cometLayer)
+        //let rotationAngle: Double = fslope(x: xp, y: yp, n: MAXTABLE, ymult: -1) // mult -1 since rotation is in pixel space, data in xy space and y is inverted between them
+        //heading = rotationAngle * 180.0 / Double.pi
+        computeBezier(numT: MAXBEZIER)
+        
+        //print("Bxp[0], Byp[0]: \(Bxp[0]), \(Byp[0])")
         
     }
 }
 
+
+// This func has not been ported .. probably won't work without a going-over...
 
 private func readGPS(val: String) {
     let latlon = val.components(separatedBy: "$")
@@ -258,7 +184,7 @@ private func readGPS(val: String) {
             var xx: Double
             var yy: Double
             
-            (xx, yy) = XYtoPixel(px: xp.last!, py: yp.last!)
+            //(xx, yy) = XYtoPixel(px: xp.last!, py: yp.last!)
             
             //let rotationAngle: Double = fslope(x: xp, y: yp, n: MAXTABLE, ymult: -1) // mult -1 since rotation is in pixel space, data in xy space and y is inverted between them
             //heading = rotationAngle * 180.0 / Double.pi
@@ -269,7 +195,7 @@ private func readGPS(val: String) {
             for i in 0 ... MAXBEZIER {
                 var bx: Double
                 var by: Double
-                (bx, by) = XYtoPixel(px: Bxp[i], py: Byp[i])
+                //(bx, by) = XYtoPixel(px: Bxp[i], py: Byp[i])
                 if i == 0 || i == MAXBEZIER {  //first point
                     //cometBezier.move(to: CGPoint(x: bx, y: by))
                 } else {
@@ -284,4 +210,20 @@ private func readGPS(val: String) {
         print("bad lat lon decode")
     }
 }
-*/
+
+func writeValue(data: String){
+    //print("in wV string: \(data)")
+    let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+    //change the "data" to valueString
+    if let blePeripheral = blePeripheral{
+        if let txCharacteristic = txCharacteristic {
+            blePeripheral.writeValue(valueString!, for: txCharacteristic, type: CBCharacteristicWriteType.withResponse)
+        }
+    }
+}
+
+func writeCharacteristic(val: Int8){
+    var val = val
+    let ns = NSData(bytes: &val, length: MemoryLayout<Int8>.size)
+    blePeripheral!.writeValue(ns as Data, for: txCharacteristic!, type: CBCharacteristicWriteType.withResponse)
+}

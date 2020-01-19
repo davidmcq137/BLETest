@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B4BB43A23CC15190008C02A /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4BB43923CC15190008C02A /* ProgressBar.swift */; };
+		7B4BB43C23CC166C0008C02A /* findField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4BB43B23CC166C0008C02A /* findField.swift */; };
+		7B4BB43E23CCA8CD0008C02A /* fieldImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4BB43D23CCA8CC0008C02A /* fieldImage.swift */; };
+		7B4BB44023CCB31D0008C02A /* fieldAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4BB43F23CCB31D0008C02A /* fieldAnnotation.swift */; };
+		7B4BB44223CCC8030008C02A /* Gauge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4BB44123CCC8030008C02A /* Gauge.swift */; };
+		7B4BB44423D00A790008C02A /* drawTape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4BB44323D00A790008C02A /* drawTape.swift */; };
 		7B57602A23CA64E300656D97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57602923CA64E300656D97 /* AppDelegate.swift */; };
 		7B57602C23CA64E300656D97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57602B23CA64E300656D97 /* SceneDelegate.swift */; };
 		7B57602F23CA64E300656D97 /* BLETest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B57602D23CA64E300656D97 /* BLETest.xcdatamodeld */; };
@@ -16,6 +22,11 @@
 		7B57603923CA64E900656D97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B57603723CA64E900656D97 /* LaunchScreen.storyboard */; };
 		7B57604423CA64E900656D97 /* BLETestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57604323CA64E900656D97 /* BLETestTests.swift */; };
 		7B57604F23CA64E900656D97 /* BLETestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57604E23CA64E900656D97 /* BLETestUITests.swift */; };
+		7B57606123CA6DE400656D97 /* UUIDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57606023CA6DE300656D97 /* UUIDKey.swift */; };
+		7B85D98F23D1642900DE33BC /* txStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D98E23D1642900DE33BC /* txStick.swift */; };
+		7B85D99123D1F38500DE33BC /* cometTail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D99023D1F38500DE33BC /* cometTail.swift */; };
+		7B85D99323D2BC6C00DE33BC /* updateIncomingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D99223D2BC6C00DE33BC /* updateIncomingData.swift */; };
+		7B85D99523D3E5EE00DE33BC /* BLELocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D99423D3E5EE00DE33BC /* BLELocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +47,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B4BB43923CC15190008C02A /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		7B4BB43B23CC166C0008C02A /* findField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = findField.swift; sourceTree = "<group>"; };
+		7B4BB43D23CCA8CC0008C02A /* fieldImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fieldImage.swift; sourceTree = "<group>"; };
+		7B4BB43F23CCB31D0008C02A /* fieldAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fieldAnnotation.swift; sourceTree = "<group>"; };
+		7B4BB44123CCC8030008C02A /* Gauge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gauge.swift; sourceTree = "<group>"; };
+		7B4BB44323D00A790008C02A /* drawTape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawTape.swift; sourceTree = "<group>"; };
 		7B57602623CA64E300656D97 /* BLETest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLETest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B57602923CA64E300656D97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B57602B23CA64E300656D97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +68,11 @@
 		7B57604A23CA64E900656D97 /* BLETestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLETestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B57604E23CA64E900656D97 /* BLETestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLETestUITests.swift; sourceTree = "<group>"; };
 		7B57605023CA64E900656D97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B57606023CA6DE300656D97 /* UUIDKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDKey.swift; sourceTree = "<group>"; };
+		7B85D98E23D1642900DE33BC /* txStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = txStick.swift; sourceTree = "<group>"; };
+		7B85D99023D1F38500DE33BC /* cometTail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cometTail.swift; sourceTree = "<group>"; };
+		7B85D99223D2BC6C00DE33BC /* updateIncomingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateIncomingData.swift; sourceTree = "<group>"; };
+		7B85D99423D3E5EE00DE33BC /* BLELocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLELocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +124,19 @@
 			isa = PBXGroup;
 			children = (
 				7B57602923CA64E300656D97 /* AppDelegate.swift */,
+				7B85D99423D3E5EE00DE33BC /* BLELocation.swift */,
+				7B57606023CA6DE300656D97 /* UUIDKey.swift */,
 				7B57602B23CA64E300656D97 /* SceneDelegate.swift */,
 				7B57603023CA64E300656D97 /* ContentView.swift */,
+				7B85D99223D2BC6C00DE33BC /* updateIncomingData.swift */,
+				7B4BB44323D00A790008C02A /* drawTape.swift */,
+				7B4BB43D23CCA8CC0008C02A /* fieldImage.swift */,
+				7B85D99023D1F38500DE33BC /* cometTail.swift */,
+				7B85D98E23D1642900DE33BC /* txStick.swift */,
+				7B4BB43F23CCB31D0008C02A /* fieldAnnotation.swift */,
+				7B4BB44123CCC8030008C02A /* Gauge.swift */,
+				7B4BB43B23CC166C0008C02A /* findField.swift */,
+				7B4BB43923CC15190008C02A /* ProgressBar.swift */,
 				7B57603223CA64E900656D97 /* Assets.xcassets */,
 				7B57603723CA64E900656D97 /* LaunchScreen.storyboard */,
 				7B57603A23CA64E900656D97 /* Info.plist */,
@@ -270,10 +303,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B4BB44023CCB31D0008C02A /* fieldAnnotation.swift in Sources */,
+				7B57606123CA6DE400656D97 /* UUIDKey.swift in Sources */,
+				7B4BB43A23CC15190008C02A /* ProgressBar.swift in Sources */,
+				7B4BB43E23CCA8CD0008C02A /* fieldImage.swift in Sources */,
+				7B4BB43C23CC166C0008C02A /* findField.swift in Sources */,
 				7B57602A23CA64E300656D97 /* AppDelegate.swift in Sources */,
+				7B85D99123D1F38500DE33BC /* cometTail.swift in Sources */,
+				7B85D98F23D1642900DE33BC /* txStick.swift in Sources */,
 				7B57602F23CA64E300656D97 /* BLETest.xcdatamodeld in Sources */,
+				7B4BB44223CCC8030008C02A /* Gauge.swift in Sources */,
+				7B85D99523D3E5EE00DE33BC /* BLELocation.swift in Sources */,
 				7B57603123CA64E300656D97 /* ContentView.swift in Sources */,
 				7B57602C23CA64E300656D97 /* SceneDelegate.swift in Sources */,
+				7B85D99323D2BC6C00DE33BC /* updateIncomingData.swift in Sources */,
+				7B4BB44423D00A790008C02A /* drawTape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
