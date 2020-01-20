@@ -27,6 +27,11 @@
 		7B85D99123D1F38500DE33BC /* cometTail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D99023D1F38500DE33BC /* cometTail.swift */; };
 		7B85D99323D2BC6C00DE33BC /* updateIncomingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D99223D2BC6C00DE33BC /* updateIncomingData.swift */; };
 		7B85D99523D3E5EE00DE33BC /* BLELocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D99423D3E5EE00DE33BC /* BLELocation.swift */; };
+		7BCC386123D4DD0B00B23DFD /* FieldMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC386023D4DD0B00B23DFD /* FieldMap.swift */; };
+		7BCC386323D4E23800B23DFD /* JAFOMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC386223D4E23800B23DFD /* JAFOMain.swift */; };
+		7BCC386723D4F70E00B23DFD /* JAFOMapOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC386623D4F70E00B23DFD /* JAFOMapOnly.swift */; };
+		7BCC386923D4F78200B23DFD /* JAFODeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC386823D4F78200B23DFD /* JAFODeviceList.swift */; };
+		7BCC386B23D5635C00B23DFD /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC386A23D5635C00B23DFD /* AlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +78,11 @@
 		7B85D99023D1F38500DE33BC /* cometTail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cometTail.swift; sourceTree = "<group>"; };
 		7B85D99223D2BC6C00DE33BC /* updateIncomingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateIncomingData.swift; sourceTree = "<group>"; };
 		7B85D99423D3E5EE00DE33BC /* BLELocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLELocation.swift; sourceTree = "<group>"; };
+		7BCC386023D4DD0B00B23DFD /* FieldMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldMap.swift; sourceTree = "<group>"; };
+		7BCC386223D4E23800B23DFD /* JAFOMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JAFOMain.swift; sourceTree = "<group>"; };
+		7BCC386623D4F70E00B23DFD /* JAFOMapOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JAFOMapOnly.swift; sourceTree = "<group>"; };
+		7BCC386823D4F78200B23DFD /* JAFODeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JAFODeviceList.swift; sourceTree = "<group>"; };
+		7BCC386A23D5635C00B23DFD /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,12 +133,17 @@
 		7B57602823CA64E300656D97 /* BLETest */ = {
 			isa = PBXGroup;
 			children = (
-				7B57602923CA64E300656D97 /* AppDelegate.swift */,
 				7B85D99423D3E5EE00DE33BC /* BLELocation.swift */,
+				7B57602923CA64E300656D97 /* AppDelegate.swift */,
 				7B57606023CA6DE300656D97 /* UUIDKey.swift */,
 				7B57602B23CA64E300656D97 /* SceneDelegate.swift */,
+				7BCC386223D4E23800B23DFD /* JAFOMain.swift */,
 				7B57603023CA64E300656D97 /* ContentView.swift */,
 				7B85D99223D2BC6C00DE33BC /* updateIncomingData.swift */,
+				7BCC386A23D5635C00B23DFD /* AlertView.swift */,
+				7BCC386623D4F70E00B23DFD /* JAFOMapOnly.swift */,
+				7BCC386823D4F78200B23DFD /* JAFODeviceList.swift */,
+				7BCC386023D4DD0B00B23DFD /* FieldMap.swift */,
 				7B4BB44323D00A790008C02A /* drawTape.swift */,
 				7B4BB43D23CCA8CC0008C02A /* fieldImage.swift */,
 				7B85D99023D1F38500DE33BC /* cometTail.swift */,
@@ -303,10 +318,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BCC386723D4F70E00B23DFD /* JAFOMapOnly.swift in Sources */,
 				7B4BB44023CCB31D0008C02A /* fieldAnnotation.swift in Sources */,
 				7B57606123CA6DE400656D97 /* UUIDKey.swift in Sources */,
 				7B4BB43A23CC15190008C02A /* ProgressBar.swift in Sources */,
 				7B4BB43E23CCA8CD0008C02A /* fieldImage.swift in Sources */,
+				7BCC386B23D5635C00B23DFD /* AlertView.swift in Sources */,
 				7B4BB43C23CC166C0008C02A /* findField.swift in Sources */,
 				7B57602A23CA64E300656D97 /* AppDelegate.swift in Sources */,
 				7B85D99123D1F38500DE33BC /* cometTail.swift in Sources */,
@@ -314,7 +331,10 @@
 				7B57602F23CA64E300656D97 /* BLETest.xcdatamodeld in Sources */,
 				7B4BB44223CCC8030008C02A /* Gauge.swift in Sources */,
 				7B85D99523D3E5EE00DE33BC /* BLELocation.swift in Sources */,
+				7BCC386123D4DD0B00B23DFD /* FieldMap.swift in Sources */,
 				7B57603123CA64E300656D97 /* ContentView.swift in Sources */,
+				7BCC386923D4F78200B23DFD /* JAFODeviceList.swift in Sources */,
+				7BCC386323D4E23800B23DFD /* JAFOMain.swift in Sources */,
 				7B57602C23CA64E300656D97 /* SceneDelegate.swift in Sources */,
 				7B85D99323D2BC6C00DE33BC /* updateIncomingData.swift in Sources */,
 				7B4BB44423D00A790008C02A /* drawTape.swift in Sources */,

@@ -32,7 +32,7 @@ struct fieldImage: View {
             let image: UIImage = UIImage(data: imageData) else {
                 fatalError("no image found")
         }
-        return Image(uiImage: image).resizable().aspectRatio(2, contentMode: .fit)
+        return Image(uiImage: image).resizable().clipped().aspectRatio(2, contentMode: .fit)
         //return Image(uiImage: image).resizable().scaledToFit()
     }
 }

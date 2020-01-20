@@ -32,7 +32,7 @@ struct Gauge: View {
                     .frame(width: gR.size.width , height: gR.size.height)
                     .rotationEffect(needleAngle(value: self.value, minValue: self.minValue, maxValue: self.maxValue), anchor: .center)
                 DrawLabels(labels: self.labels, value: self.value, minValue: self.minValue, maxValue: self.maxValue)
-                Text(self.title).position(CGPoint(x: gR.size.width/2, y: gR.size.height)).font(.headline)
+                Text(self.title).position(CGPoint(x: gR.size.width/2, y: 0.9*gR.size.height)).font(.headline)
             }
         }
     }
@@ -52,7 +52,7 @@ struct DrawLabels: View {
                     //th = -3 * .pi / 4 + $0 * 2 * (3 * .pi / 4)/5
                     //xp = 150 / 2 - 150 / 2 * sin(th)
                     //yp = 150 / 2 - 150 / 2 * cos(th)
-                    Text("\(self.labels[$0])").position(labelPoint(value: self.labels[$0], length: Double(gR.size.height/2), minValue: self.minValue, maxValue: self.maxValue ))
+                    Text("\(self.labels[$0])").position(labelPoint(value: self.labels[$0], length: 0.86*Double(gR.size.height/2), center: Double(gR.size.height/2), minValue: self.minValue, maxValue: self.maxValue ))
                 }
             }
         }
@@ -62,7 +62,7 @@ struct DrawLabels: View {
 struct GaugeArc : Shape {
     func path(in rect: CGRect) -> Path {
         var p = Path()
-        p.addArc(center: CGPoint(x: rect.midX, y:rect.midY), radius: rect.midX*0.8, startAngle: .degrees(-135-90), endAngle: .degrees(135-90), clockwise: false)
+        p.addArc(center: CGPoint(x: rect.midX, y:rect.midY), radius: rect.midX*0.6, startAngle: .degrees(-135-90), endAngle: .degrees(135-90), clockwise: false)
         return p.strokedPath(.init(lineWidth: rect.maxX/20, lineCap: .round))
     }
 }
@@ -73,7 +73,7 @@ struct Needle: Shape {
 
         var path = Path()
         let eps: CGFloat = 0.03
-        let lenscale: CGFloat = 0.80
+        let lenscale: CGFloat = 0.6
         let len: CGFloat = lenscale * (rect.maxX - rect.minX) / CGFloat(2.0)
 
         path.addEllipse(in: CGRect(x: rect.midX - eps*rect.maxX, y: rect.midY - eps*rect.maxY, width: eps*rect.maxX*2, height: eps*rect.maxY*2))
@@ -93,9 +93,9 @@ private func CGRotate (x: Double, y: Double, x0: Double, y0: Double, rotation: D
     return CGPoint(x: x * cs - y * ss + x0, y: x * ss + y * cs + y0)
 }
 
-private func labelPoint(value: Int, length: Double, minValue: Double, maxValue: Double) -> CGPoint {
+private func labelPoint(value: Int, length: Double, center: Double, minValue: Double, maxValue: Double) -> CGPoint {
     let a: Double = Double(labelAngle(value: Double(value), minValue: minValue, maxValue: maxValue))
-    let p: CGPoint = CGPoint(x: length*sin(a) + length, y: length*cos(a) + length)
+    let p: CGPoint = CGPoint(x: length*sin(a) + center, y: length*cos(a) + center)
     return p
 }
 

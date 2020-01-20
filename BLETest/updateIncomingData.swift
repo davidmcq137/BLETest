@@ -20,7 +20,12 @@ class Telem: ObservableObject {
     @Published var stickP: [Double] = [0,0,0,0]
     @Published var currentXd: Double = 0
     @Published var currentYd: Double = 0
+    @Published var BLERSSIs: [Int] = []
+    @Published var BLEperipherals: [String] = []
+    @Published var BLEUUIDs: [String] = []
+    @Published var BLEUserData: Bool = true
 }
+
 
 var icount: Int = 0
 

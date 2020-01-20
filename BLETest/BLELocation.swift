@@ -1,55 +1,103 @@
 //
-//  BLE.swift
-//  BLETest
+//  BLELocation.swift
 //
-//  Created by David Mcqueeney on 1/18/20.
-//  Copyright © 2020 David Mcqueeney. All rights reserved.
+//
+//  Created by David McQueeney on 1/18/20.
+//  Copyright © 2020 David McQueeney. All rights reserved.
 //
 
 import Foundation
 import SwiftUI
 import CoreBluetooth
 import CoreLocation
+import Combine
+import AVFoundation
+
+var txCharacteristic : CBCharacteristic?
+var rxCharacteristic : CBCharacteristic?
+var blePeripheral : CBPeripheral?
+var characteristicASCIIValue = NSString()
+var BLEConnected = false
+var BLETimer: Timer?
+var InputBuffer: String = ""
 
 
 
-/*
+var RSSIs = [NSNumber]()
+var peripherals: [CBPeripheral] = []
+var characteristicValue = [CBUUID: NSData]()
+var data = NSMutableData()
+var writeData: String = ""
+var timer = Timer()
+var characteristics = [String : CBCharacteristic]()
 
-
-class BLELocation:  UIResponder, CBCentralManagerDelegate, CBPeripheralDelegate, CLLocationManagerDelegate {
-   
+class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate, CBPeripheralDelegate, CLLocationManagerDelegate {
     
-    func JStartup() {
-        
+    var centralManager: CBCentralManager!
+    static var blelocation = BLELocation()
+
+    
+    private override init() {
+        super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
-        
-        print("setting field vars nil")
-        currentField = nil
-        currentImageIndex = nil
-        
-        manager.delegate = self
-        manager.requestAlwaysAuthorization()
-        manager.desiredAccuracy = kCLLocationAccuracyKilometer
-        manager.requestLocation()
-        
-        return
     }
     
-    
+    @EnvironmentObject var tel: Telem
+
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        
+
+
         blePeripheral = peripheral
+        var new: Bool = false
+        print("have new one: \( peripheral.name ?? "unknown") ")
+        print("peripherals.count: \(peripherals.count)")
+        
+        if peripherals.count > 0 {
+            for i in 0 ..< peripherals.count {
+                print("i: \(i), peripheral: \(peripheral), peripherals[i]: \(peripherals[i])")
+                if peripheral.name != peripherals[i].name {
+                    print("new: \(peripheral.name ?? "unknown")")
+                    new = true
+                }
+            }
+            
+            if new == false {
+                print("Duplicate: \(peripheral)")
+                return
+            }
+        }
+        
+        var str: String = "Device: " + (peripheral.name ?? "unknown")
+        str = str + " UUID: " + (blePeripheral?.identifier.uuidString ?? "unknown") + " RSSI: \(RSSI)"
+        
         peripherals.append(peripheral)
         RSSIs.append(RSSI)
         peripheral.delegate = self
+
+        // put test here so as not to append duplicates...
         
+        tele.BLEperipherals.append(str)
+        tele.BLERSSIs.append(Int(truncating: RSSI))
+        tele.BLEUUIDs.append(blePeripheral?.identifier.uuidString ?? "unknown")
+        
+
         if blePeripheral != nil {
-            //print("Found new pheripheral devices with services")
-            //print("Peripheral name: \(String(describing: peripheral.name))")
-            //print("**********************************")
+            print("Found new pheripheral devices with services")
+            print("Peripheral name: \(peripheral.name ?? "unknown")")
+            print("RSSI: \(RSSI)")
             //print ("Advertisement Data : \(advertisementData)")
         }
+        
+        let defaults = UserDefaults.standard
+        let storedBLEUUID = defaults.object(forKey: "BLEUUID") as? String ?? "unknown"
+        if storedBLEUUID == "unknown" {
+            tele.BLEUserData = false
+        } else {
+            tele.BLEUserData = true
+        }
+        print("stored UUID: \(storedBLEUUID)")
+
         //
         // check if we have the BTE id of the device we are configured for
         // todo: arrange persistent storage for this value at a later time .. a config option is needed
@@ -57,13 +105,13 @@ class BLELocation:  UIResponder, CBCentralManagerDelegate, CBPeripheralDelegate,
         // C43BD593-DA12-7816-79D0-8B39B1E0C424
         // 982526B8-658D-D0CB-5280-2049D0BF8305
         // 087F253D-24A7-EF4E-9D4D-09650EC0C673
-        if blePeripheral?.identifier.uuidString == "087F253D-24A7-EF4E-9D4D-09650EC0C673" {
-            //print("YUP!")
+        if blePeripheral?.identifier.uuidString == storedBLEUUID {
+        //if blePeripheral?.identifier.uuidString == "087F253D-24A7-EF4E-9D4D-09650EC0C673" {
+            print("YUP!")
             characteristicASCIIValue = ""
-            print("Connecting to BLE device")
             connectToDevice()
         } else {
-            //print("NOPE!")
+            print("NOPE!")
             print("id:\(String(describing: blePeripheral?.identifier.uuidString))")
         }
     }
@@ -97,14 +145,17 @@ class BLELocation:  UIResponder, CBCentralManagerDelegate, CBPeripheralDelegate,
         print("Failed to find user's location: \(error.localizedDescription)")
     }
     
-    /*
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        //print("application override point")
-        /*Our key player in this app will be our CBCentralManager. CBCentralManager objects are used to manage discovered or connected remote peripheral devices (represented by CBPeripheral objects), including scanning for, discovering, and connecting to advertising peripherals.
-         */
+    
+    func JAFOStartup() {
         
-        centralManager = CBCentralManager(delegate: self, queue: nil)
+        //centralManager = CBCentralManager(delegate: self, queue: nil)
+        //print("centralManager: \(String(describing: centralManager))")
+        
+        let utterance = AVSpeechUtterance(string: "Launching JAFO, Requesting G P S location")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-AU")
+        utterance.rate = 0.5
+        let synth = AVSpeechSynthesizer()
+        synth.speak(utterance)
         
         print("setting field vars nil")
         currentField = nil
@@ -115,10 +166,7 @@ class BLELocation:  UIResponder, CBCentralManagerDelegate, CBPeripheralDelegate,
         manager.desiredAccuracy = kCLLocationAccuracyKilometer
         manager.requestLocation()
         
-        return true
     }
-    
-    */
     
     func startScan() {
         peripherals = []
@@ -134,17 +182,11 @@ class BLELocation:  UIResponder, CBCentralManagerDelegate, CBPeripheralDelegate,
         centralManager?.stopScan()
         print("Scan Stopped")
         print("Number of Peripherals Found: \(peripherals.count)")
+        if peripherals.count > 0 && !BLEConnected { // hopefully user went to BLE devices tab and picked one...
+            print("****** Found at least one peripheral: RESTARTING SCAN *********")
+            startScan()
+        }
     }
-    
-    
-    //centralManager?.stopScan()
-    
-    
-    
-    //Peripheral Connections: Connecting, Connected, Disconnected
-    
-    //-Connection
-    
     
     /*
      Invoked when a connection is successfully created with a peripheral.
@@ -156,8 +198,8 @@ class BLELocation:  UIResponder, CBCentralManagerDelegate, CBPeripheralDelegate,
         //print("Connection complete")
         BLEConnected = true
         let BLE_id = blePeripheral!.identifier.uuidString
-        //print("Peripheral ID: \(BLE_id)")
-        //print("Peripheral info: \(String(describing: blePeripheral))")
+        print("Peripheral ID: \(BLE_id)")
+        print("Peripheral info: \(String(describing: blePeripheral))")
         
         //Stop Scan- We don't need to scan once we've connected to a peripheral. We got what we came for.
         centralManager?.stopScan()
@@ -352,8 +394,8 @@ class BLELocation:  UIResponder, CBCentralManagerDelegate, CBPeripheralDelegate,
         BLEConnected = false
         //NotificationCenter.default.removeObserver(self)
         // no point ot restarting scan here .. need to check periodically in incoming data loop
-        //print("Restarting Scan")
-        //startScan()
+        print("Restarting Scan")
+        startScan()
     }
     
     
@@ -403,5 +445,24 @@ class BLELocation:  UIResponder, CBCentralManagerDelegate, CBPeripheralDelegate,
      (didUpdateNotificationStateForCharacteristic will cancel the connection if a subscription is involved)
      */
     
-}
-*/
+    
+    
+    // MARK: UISceneSession Lifecycle
+    
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        // Called when a new scene session is being created.
+        // Use this method to select a configuration to create the new scene with.
+        //print("application new scene session")
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+    
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+        // Called when the user discards a scene session.
+        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
+        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+        //print("application discard scene session")
+    }
+ }
+
+
+
