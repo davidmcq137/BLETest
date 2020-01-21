@@ -151,6 +151,15 @@ class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate
         //centralManager = CBCentralManager(delegate: self, queue: nil)
         //print("centralManager: \(String(describing: centralManager))")
         
+        let teststr="this is a test string"
+         let testfilename = getDocumentsDirectory().appendingPathComponent("test.file")
+         do {
+             try teststr.write(to: testfilename, atomically: true, encoding: String.Encoding.utf8)
+             print("written")
+         } catch {
+             print("bad write")
+         }
+        
         let utterance = AVSpeechUtterance(string: "Launching JAFO, Requesting G P S location")
         utterance.voice = AVSpeechSynthesisVoice(language: "en-AU")
         utterance.rate = 0.5

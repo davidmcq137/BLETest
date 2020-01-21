@@ -30,7 +30,8 @@ struct fieldImage: View {
             FileManager.default.fileExists(atPath: imagePath),
             let imageData: Data = try? Data(contentsOf: imageURL),
             let image: UIImage = UIImage(data: imageData) else {
-                fatalError("no image found")
+                //fatalError("no image found: \(imagePath) filemanager")
+                fatalError("no image found: \(imagePath) filemanager")
         }
         return Image(uiImage: image).resizable().clipped().aspectRatio(2, contentMode: .fit)
         //return Image(uiImage: image).resizable().scaledToFit()

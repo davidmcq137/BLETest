@@ -22,8 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate { //}, CBCentralManagerDel
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         //print("application override point")
+        
         print("App Delegate override point - calling JAFOStartup")
-
         BLELocation.blelocation.JAFOStartup()
 
         return true

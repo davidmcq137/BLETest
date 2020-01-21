@@ -17,12 +17,12 @@
 		7B57602C23CA64E300656D97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57602B23CA64E300656D97 /* SceneDelegate.swift */; };
 		7B57602F23CA64E300656D97 /* BLETest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B57602D23CA64E300656D97 /* BLETest.xcdatamodeld */; };
 		7B57603123CA64E300656D97 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57603023CA64E300656D97 /* ContentView.swift */; };
-		7B57603323CA64E900656D97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B57603223CA64E900656D97 /* Assets.xcassets */; };
 		7B57603623CA64E900656D97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B57603523CA64E900656D97 /* Preview Assets.xcassets */; };
 		7B57603923CA64E900656D97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B57603723CA64E900656D97 /* LaunchScreen.storyboard */; };
 		7B57604423CA64E900656D97 /* BLETestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57604323CA64E900656D97 /* BLETestTests.swift */; };
 		7B57604F23CA64E900656D97 /* BLETestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57604E23CA64E900656D97 /* BLETestUITests.swift */; };
 		7B57606123CA6DE400656D97 /* UUIDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57606023CA6DE300656D97 /* UUIDKey.swift */; };
+		7B6AF9AF23D6BC220009E971 /* Assets copy.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B6AF9AE23D6BC220009E971 /* Assets copy.xcassets */; };
 		7B85D98F23D1642900DE33BC /* txStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D98E23D1642900DE33BC /* txStick.swift */; };
 		7B85D99123D1F38500DE33BC /* cometTail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D99023D1F38500DE33BC /* cometTail.swift */; };
 		7B85D99323D2BC6C00DE33BC /* updateIncomingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D99223D2BC6C00DE33BC /* updateIncomingData.swift */; };
@@ -58,22 +58,22 @@
 		7B4BB43F23CCB31D0008C02A /* fieldAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fieldAnnotation.swift; sourceTree = "<group>"; };
 		7B4BB44123CCC8030008C02A /* Gauge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gauge.swift; sourceTree = "<group>"; };
 		7B4BB44323D00A790008C02A /* drawTape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = drawTape.swift; sourceTree = "<group>"; };
-		7B57602623CA64E300656D97 /* BLETest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLETest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B57602623CA64E300656D97 /* JAFO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JAFO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B57602923CA64E300656D97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B57602B23CA64E300656D97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7B57602E23CA64E300656D97 /* BLETest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BLETest.xcdatamodel; sourceTree = "<group>"; };
 		7B57603023CA64E300656D97 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		7B57603223CA64E900656D97 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B57603523CA64E900656D97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7B57603823CA64E900656D97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B57603A23CA64E900656D97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B57603F23CA64E900656D97 /* BLETestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLETestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B57603F23CA64E900656D97 /* JAFO-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JAFO-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B57604323CA64E900656D97 /* BLETestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLETestTests.swift; sourceTree = "<group>"; };
 		7B57604523CA64E900656D97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B57604A23CA64E900656D97 /* BLETestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BLETestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B57604A23CA64E900656D97 /* JAFO-SwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JAFO-SwiftUIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B57604E23CA64E900656D97 /* BLETestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLETestUITests.swift; sourceTree = "<group>"; };
 		7B57605023CA64E900656D97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B57606023CA6DE300656D97 /* UUIDKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDKey.swift; sourceTree = "<group>"; };
+		7B6AF9AE23D6BC220009E971 /* Assets copy.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets copy.xcassets"; sourceTree = "<group>"; };
 		7B85D98E23D1642900DE33BC /* txStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = txStick.swift; sourceTree = "<group>"; };
 		7B85D99023D1F38500DE33BC /* cometTail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cometTail.swift; sourceTree = "<group>"; };
 		7B85D99223D2BC6C00DE33BC /* updateIncomingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateIncomingData.swift; sourceTree = "<group>"; };
@@ -123,9 +123,9 @@
 		7B57602723CA64E300656D97 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7B57602623CA64E300656D97 /* BLETest.app */,
-				7B57603F23CA64E900656D97 /* BLETestTests.xctest */,
-				7B57604A23CA64E900656D97 /* BLETestUITests.xctest */,
+				7B57602623CA64E300656D97 /* JAFO.app */,
+				7B57603F23CA64E900656D97 /* JAFO-SwiftUITests.xctest */,
+				7B57604A23CA64E900656D97 /* JAFO-SwiftUIUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,6 +145,7 @@
 				7BCC386823D4F78200B23DFD /* JAFODeviceList.swift */,
 				7BCC386023D4DD0B00B23DFD /* FieldMap.swift */,
 				7B4BB44323D00A790008C02A /* drawTape.swift */,
+				7B6AF9AE23D6BC220009E971 /* Assets copy.xcassets */,
 				7B4BB43D23CCA8CC0008C02A /* fieldImage.swift */,
 				7B85D99023D1F38500DE33BC /* cometTail.swift */,
 				7B85D98E23D1642900DE33BC /* txStick.swift */,
@@ -152,7 +153,6 @@
 				7B4BB44123CCC8030008C02A /* Gauge.swift */,
 				7B4BB43B23CC166C0008C02A /* findField.swift */,
 				7B4BB43923CC15190008C02A /* ProgressBar.swift */,
-				7B57603223CA64E900656D97 /* Assets.xcassets */,
 				7B57603723CA64E900656D97 /* LaunchScreen.storyboard */,
 				7B57603A23CA64E900656D97 /* Info.plist */,
 				7B57602D23CA64E300656D97 /* BLETest.xcdatamodeld */,
@@ -190,9 +190,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7B57602523CA64E300656D97 /* BLETest */ = {
+		7B57602523CA64E300656D97 /* JAFO-SwiftUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B57605323CA64E900656D97 /* Build configuration list for PBXNativeTarget "BLETest" */;
+			buildConfigurationList = 7B57605323CA64E900656D97 /* Build configuration list for PBXNativeTarget "JAFO-SwiftUI" */;
 			buildPhases = (
 				7B57602223CA64E300656D97 /* Sources */,
 				7B57602323CA64E300656D97 /* Frameworks */,
@@ -202,14 +202,14 @@
 			);
 			dependencies = (
 			);
-			name = BLETest;
+			name = "JAFO-SwiftUI";
 			productName = BLETest;
-			productReference = 7B57602623CA64E300656D97 /* BLETest.app */;
+			productReference = 7B57602623CA64E300656D97 /* JAFO.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7B57603E23CA64E900656D97 /* BLETestTests */ = {
+		7B57603E23CA64E900656D97 /* JAFO-SwiftUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B57605623CA64E900656D97 /* Build configuration list for PBXNativeTarget "BLETestTests" */;
+			buildConfigurationList = 7B57605623CA64E900656D97 /* Build configuration list for PBXNativeTarget "JAFO-SwiftUITests" */;
 			buildPhases = (
 				7B57603B23CA64E900656D97 /* Sources */,
 				7B57603C23CA64E900656D97 /* Frameworks */,
@@ -220,14 +220,14 @@
 			dependencies = (
 				7B57604123CA64E900656D97 /* PBXTargetDependency */,
 			);
-			name = BLETestTests;
+			name = "JAFO-SwiftUITests";
 			productName = BLETestTests;
-			productReference = 7B57603F23CA64E900656D97 /* BLETestTests.xctest */;
+			productReference = 7B57603F23CA64E900656D97 /* JAFO-SwiftUITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7B57604923CA64E900656D97 /* BLETestUITests */ = {
+		7B57604923CA64E900656D97 /* JAFO-SwiftUIUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B57605923CA64E900656D97 /* Build configuration list for PBXNativeTarget "BLETestUITests" */;
+			buildConfigurationList = 7B57605923CA64E900656D97 /* Build configuration list for PBXNativeTarget "JAFO-SwiftUIUITests" */;
 			buildPhases = (
 				7B57604623CA64E900656D97 /* Sources */,
 				7B57604723CA64E900656D97 /* Frameworks */,
@@ -238,9 +238,9 @@
 			dependencies = (
 				7B57604C23CA64E900656D97 /* PBXTargetDependency */,
 			);
-			name = BLETestUITests;
+			name = "JAFO-SwiftUIUITests";
 			productName = BLETestUITests;
-			productReference = 7B57604A23CA64E900656D97 /* BLETestUITests.xctest */;
+			productReference = 7B57604A23CA64E900656D97 /* JAFO-SwiftUIUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -266,7 +266,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7B57602123CA64E300656D97 /* Build configuration list for PBXProject "BLETest" */;
+			buildConfigurationList = 7B57602123CA64E300656D97 /* Build configuration list for PBXProject "JAFO-SwiftUI" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -279,9 +279,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7B57602523CA64E300656D97 /* BLETest */,
-				7B57603E23CA64E900656D97 /* BLETestTests */,
-				7B57604923CA64E900656D97 /* BLETestUITests */,
+				7B57602523CA64E300656D97 /* JAFO-SwiftUI */,
+				7B57603E23CA64E900656D97 /* JAFO-SwiftUITests */,
+				7B57604923CA64E900656D97 /* JAFO-SwiftUIUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -293,7 +293,7 @@
 			files = (
 				7B57603923CA64E900656D97 /* LaunchScreen.storyboard in Resources */,
 				7B57603623CA64E900656D97 /* Preview Assets.xcassets in Resources */,
-				7B57603323CA64E900656D97 /* Assets.xcassets in Resources */,
+				7B6AF9AF23D6BC220009E971 /* Assets copy.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,12 +362,12 @@
 /* Begin PBXTargetDependency section */
 		7B57604123CA64E900656D97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7B57602523CA64E300656D97 /* BLETest */;
+			target = 7B57602523CA64E300656D97 /* JAFO-SwiftUI */;
 			targetProxy = 7B57604023CA64E900656D97 /* PBXContainerItemProxy */;
 		};
 		7B57604C23CA64E900656D97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7B57602523CA64E300656D97 /* BLETest */;
+			target = 7B57602523CA64E300656D97 /* JAFO-SwiftUI */;
 			targetProxy = 7B57604B23CA64E900656D97 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -511,8 +511,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Marshall-Fazzone.BLETest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Marshall-Fazzone.JAFO-SwiftUI";
+				PRODUCT_NAME = JAFO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -531,8 +531,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Marshall-Fazzone.BLETest";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Marshall-Fazzone.JAFO-SwiftUI";
+				PRODUCT_NAME = JAFO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -556,7 +556,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BLETest.app/BLETest";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JAFO-SwiftUI.app/JAFO-SwiftUI";
 			};
 			name = Debug;
 		};
@@ -578,7 +578,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BLETest.app/BLETest";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JAFO-SwiftUI.app/JAFO-SwiftUI";
 			};
 			name = Release;
 		};
@@ -625,7 +625,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7B57602123CA64E300656D97 /* Build configuration list for PBXProject "BLETest" */ = {
+		7B57602123CA64E300656D97 /* Build configuration list for PBXProject "JAFO-SwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B57605123CA64E900656D97 /* Debug */,
@@ -634,7 +634,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B57605323CA64E900656D97 /* Build configuration list for PBXNativeTarget "BLETest" */ = {
+		7B57605323CA64E900656D97 /* Build configuration list for PBXNativeTarget "JAFO-SwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B57605423CA64E900656D97 /* Debug */,
@@ -643,7 +643,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B57605623CA64E900656D97 /* Build configuration list for PBXNativeTarget "BLETestTests" */ = {
+		7B57605623CA64E900656D97 /* Build configuration list for PBXNativeTarget "JAFO-SwiftUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B57605723CA64E900656D97 /* Debug */,
@@ -652,7 +652,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B57605923CA64E900656D97 /* Build configuration list for PBXNativeTarget "BLETestUITests" */ = {
+		7B57605923CA64E900656D97 /* Build configuration list for PBXNativeTarget "JAFO-SwiftUIUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B57605A23CA64E900656D97 /* Debug */,
