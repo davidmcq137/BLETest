@@ -23,6 +23,7 @@
 		7B57604F23CA64E900656D97 /* BLETestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57604E23CA64E900656D97 /* BLETestUITests.swift */; };
 		7B57606123CA6DE400656D97 /* UUIDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B57606023CA6DE300656D97 /* UUIDKey.swift */; };
 		7B6AF9AF23D6BC220009E971 /* Assets copy.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B6AF9AE23D6BC220009E971 /* Assets copy.xcassets */; };
+		7B6AF9B123D6C2660009E971 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B6AF9B023D6C2660009E971 /* Default-568h@2x.png */; };
 		7B85D98F23D1642900DE33BC /* txStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D98E23D1642900DE33BC /* txStick.swift */; };
 		7B85D99123D1F38500DE33BC /* cometTail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D99023D1F38500DE33BC /* cometTail.swift */; };
 		7B85D99323D2BC6C00DE33BC /* updateIncomingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85D99223D2BC6C00DE33BC /* updateIncomingData.swift */; };
@@ -74,6 +75,7 @@
 		7B57605023CA64E900656D97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B57606023CA6DE300656D97 /* UUIDKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDKey.swift; sourceTree = "<group>"; };
 		7B6AF9AE23D6BC220009E971 /* Assets copy.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets copy.xcassets"; sourceTree = "<group>"; };
+		7B6AF9B023D6C2660009E971 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7B85D98E23D1642900DE33BC /* txStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = txStick.swift; sourceTree = "<group>"; };
 		7B85D99023D1F38500DE33BC /* cometTail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cometTail.swift; sourceTree = "<group>"; };
 		7B85D99223D2BC6C00DE33BC /* updateIncomingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateIncomingData.swift; sourceTree = "<group>"; };
@@ -113,9 +115,10 @@
 		7B57601D23CA64E300656D97 = {
 			isa = PBXGroup;
 			children = (
-				7B57602823CA64E300656D97 /* BLETest */,
-				7B57604223CA64E900656D97 /* BLETestTests */,
-				7B57604D23CA64E900656D97 /* BLETestUITests */,
+				7B6AF9B023D6C2660009E971 /* Default-568h@2x.png */,
+				7B57602823CA64E300656D97 /* JAFO-SwiftUI */,
+				7B57604223CA64E900656D97 /* JAFO-SwiftUITests */,
+				7B57604D23CA64E900656D97 /* JAFO-SwiftUIUITests */,
 				7B57602723CA64E300656D97 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,7 +133,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7B57602823CA64E300656D97 /* BLETest */ = {
+		7B57602823CA64E300656D97 /* JAFO-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
 				7B85D99423D3E5EE00DE33BC /* BLELocation.swift */,
@@ -158,7 +161,7 @@
 				7B57602D23CA64E300656D97 /* BLETest.xcdatamodeld */,
 				7B57603423CA64E900656D97 /* Preview Content */,
 			);
-			path = BLETest;
+			path = "JAFO-SwiftUI";
 			sourceTree = "<group>";
 		};
 		7B57603423CA64E900656D97 /* Preview Content */ = {
@@ -169,22 +172,22 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		7B57604223CA64E900656D97 /* BLETestTests */ = {
+		7B57604223CA64E900656D97 /* JAFO-SwiftUITests */ = {
 			isa = PBXGroup;
 			children = (
 				7B57604323CA64E900656D97 /* BLETestTests.swift */,
 				7B57604523CA64E900656D97 /* Info.plist */,
 			);
-			path = BLETestTests;
+			path = "JAFO-SwiftUITests";
 			sourceTree = "<group>";
 		};
-		7B57604D23CA64E900656D97 /* BLETestUITests */ = {
+		7B57604D23CA64E900656D97 /* JAFO-SwiftUIUITests */ = {
 			isa = PBXGroup;
 			children = (
 				7B57604E23CA64E900656D97 /* BLETestUITests.swift */,
 				7B57605023CA64E900656D97 /* Info.plist */,
 			);
-			path = BLETestUITests;
+			path = "JAFO-SwiftUIUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B57603923CA64E900656D97 /* LaunchScreen.storyboard in Resources */,
+				7B6AF9B123D6C2660009E971 /* Default-568h@2x.png in Resources */,
 				7B57603623CA64E900656D97 /* Preview Assets.xcassets in Resources */,
 				7B6AF9AF23D6BC220009E971 /* Assets copy.xcassets in Resources */,
 			);
@@ -503,10 +507,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"BLETest/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Y8UM4R3JR7;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = BLETest/Info.plist;
+				INFOPLIST_FILE = "JAFO-SwiftUI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -523,10 +527,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"BLETest/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Y8UM4R3JR7;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = BLETest/Info.plist;
+				INFOPLIST_FILE = "JAFO-SwiftUI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
