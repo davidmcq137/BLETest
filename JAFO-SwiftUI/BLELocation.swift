@@ -123,20 +123,24 @@ class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate
             print("Found user's location: \(location)")
             print("Lat: \(location.coordinate.latitude)")
             print("Lon: \(location.coordinate.longitude)")
-            print("DEBUG: Inserting BDS")
-            iPadLat = 41.339733//location.coordinate.latitude
-            iPadLon = -74.431618//location.coordinate.longitude
             
+            //print("DEBUG: Inserting BDS")
+            //iPadLat = 41.339733//location.coordinate.latitude
+            //iPadLon = -74.431618//location.coordinate.longitude
             
-            currentField = findField(lat: iPadLat, lon: iPadLon)
-            if currentField != nil {
+            //print("DEBUG: Inserting GA Jets")
+            //iPadLat = 33.1372    //location.coordinate.latitude
+            //iPadLon = -84.611143 //location.coordinate.longitude
+
+            tele.iPadLat = location.coordinate.latitude
+            tele.iPadLon = location.coordinate.longitude
+            //tele.xxxlat = iPadLat
+            //tele.xxxlon = iPadLon
+            
+            _ = findField(lat: tele.iPadLat, lon: tele.iPadLon)
+            if activeField.imageIdx >= 0 {
                 print("We are at a known field!")
-                print ("shortname: \(String(describing: currentField?.shortname))")
-                currentImageIndex = 0
-                //print("image: \(currentField!.images[currentImageIndex!].filename)")
-                currentImage = currentField!.images[currentImageIndex!].filename
-            } else {
-                currentImageIndex = nil
+                print ("shortname: \(String(activeField.shortname))")
             }
         }
     }
@@ -151,6 +155,7 @@ class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate
         //centralManager = CBCentralManager(delegate: self, queue: nil)
         //print("centralManager: \(String(describing: centralManager))")
         
+        /*
         let teststr="this is a test string"
          let testfilename = getDocumentsDirectory().appendingPathComponent("test.file")
          do {
@@ -159,6 +164,7 @@ class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate
          } catch {
              print("bad write")
          }
+        */
         
         let utterance = AVSpeechUtterance(string: "Launching JAFO, Requesting G P S location")
         utterance.voice = AVSpeechSynthesisVoice(language: "en-AU")
@@ -167,12 +173,11 @@ class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate
         synth.speak(utterance)
         
         print("setting field vars nil")
-        currentField = nil
-        currentImageIndex = nil
+        activeField.imageIdx = -1
         
         manager.delegate = self
         manager.requestAlwaysAuthorization()
-        manager.desiredAccuracy = kCLLocationAccuracyKilometer
+        manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         manager.requestLocation()
         
     }

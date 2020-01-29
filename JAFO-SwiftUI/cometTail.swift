@@ -21,6 +21,7 @@ var toYpix: Double = 0
 
 let MAXTABLE: Int = 16
 let MAXBEZIER: Int = 8
+let xrange: [Double] = [1500, 3000, 6000]
 
 var xp: [Double] = Array(repeating: 0.0, count: MAXTABLE+1)
 var yp: [Double] = Array(repeating: 0.0, count: MAXTABLE+1)
@@ -30,10 +31,10 @@ var Bxp: [Double]  = Array(repeating: 0.0, count: MAXBEZIER+1)
 var Byp: [Double]  = Array(repeating: 0.0, count: MAXBEZIER+1)
 
 func xPix(xd: Double, width: Double) -> CGFloat{
-    if currentField == nil || currentImageIndex == nil {
+    if activeField.imageIdx < 0 {
         return CGFloat(0.0)
     }
-    let xr = currentField!.images[currentImageIndex!].xrange
+    let xr = xrange[activeField.imageIdx]
     let xp =  width/2 + width * xd / xr
     //print("xd: \(xd), xp:\(xp)")
     return CGFloat(xp)
@@ -41,10 +42,10 @@ func xPix(xd: Double, width: Double) -> CGFloat{
 
 
 func yPix(yd: Double, height: Double) -> CGFloat {
-    if currentField == nil || currentImageIndex == nil {
+    if activeField.imageIdx < 0 {
         return CGFloat(0.0)
     }
-    let yr = currentField!.images[currentImageIndex!].xrange / 2
+    let yr = xrange[activeField.imageIdx] / 2
     var yp =  height / 4 + height * yd / yr
     yp = height - yp
     //print("yd: \(yd), yp:\(yp)")

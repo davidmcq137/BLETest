@@ -17,12 +17,13 @@ struct fieldAnnotation: View {
         self.idx = idx
     }
     
+    let xrange: [Int] = [1500, 3000, 6000]
     var body: some View {
         var annot: String
-        if idx != nil {
-            let xr = String(format: "%d", Int(currentField!.images[idx!].xrange))
-            annot = currentField!.name + " (" + currentField!.shortname + ")" + "\r\n"
-            annot = annot + "File: " + currentField!.images[idx!].filename + " "
+        if idx! >= 0 {
+            let xr = String(format: "%d", xrange[idx!])
+            annot = activeField.longname + " (" + activeField.shortname + ")" + "\r\n"
+            annot = annot + "File: " + activeField.images[idx!] + " "
             annot = annot + "  Scale: " + xr +  " ft"
         } else {
             annot = "No Field Selected"

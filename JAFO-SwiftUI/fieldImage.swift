@@ -18,8 +18,8 @@ struct fieldImage: View {
     
     var body: some View {
         var imageName: String!
-        if currentField != nil {
-            imageName =  "iPad_" + currentField!.images[idx!].filename
+        if activeField.imageIdx >= 0 { // idx is -1 if no field selected
+            imageName =  activeField.images[activeField.imageIdx] + ".png"
         } else {
             imageName =  "iPad_FBF_6000_ft.png"
         }
@@ -32,7 +32,10 @@ struct fieldImage: View {
             let image: UIImage = UIImage(data: imageData) else {
                 //fatalError("no image found: \(imagePath) filemanager")
                 fatalError("no image found: \(imagePath) filemanager")
+
         }
+        print("image size: width height", image.size.width, image.size.height)
+
         return Image(uiImage: image).resizable().clipped().aspectRatio(2, contentMode: .fit)
         //return Image(uiImage: image).resizable().scaledToFit()
     }
@@ -55,9 +58,9 @@ struct drawRunway: Shape {
         if idx == nil {
             return path
         }
-        
-        let hrwW = currentField!.runway.width/2
-        let hrwL = currentField!.runway.length/2
+
+        let hrwW = activeField.runwaywidth / 2
+        let hrwL = activeField.runwaylength / 2
         
         path.move(to: CGPoint(x: xPix(xd: -hrwL, width: self.width), y: yPix(yd: -hrwW, height: self.height)))
         path.addLine(to: CGPoint(x: xPix(xd: -hrwL, width: self.width), y: yPix(yd: hrwW, height: self.height)))
@@ -82,16 +85,17 @@ struct drawPOIs: View {
     }
     var body: some View {
         ZStack { // have to have this because of conditional on currentField. Tried @ViewBuilder to no avail...
-            if (currentField != nil) {
-                ForEach ((0 ... (currentField!.POI!.count - 1) ), id: \.self) {
-                    Circle()
-                        .fill(Color.yellow)
-                        .frame(width: CGFloat(self.width/40), height: CGFloat(self.height/40))
-                        .position(x: xPix(xd: GPStoX(lat: currentField!.POI![$0].lat, lon: currentField!.POI![$0].long),
-                                          width: self.width),
-                                  y: yPix(yd: GPStoY(lat: currentField!.POI![$0].lat, lon: currentField!.POI![$0].long), height: self.height))
-                }
-            }
-        }
+            Text("Testing 123")
+//            if (activeField.imageIdx >= 0) {
+//                //ForEach ((0 ... (currentField!.POI!.count - 1) ), id: \.self) {
+//                    Circle()
+//                        .fill(Color.yellow)
+//                        .frame(width: CGFloat(self.width/40), height: CGFloat(self.height/40))
+//                        .position(x: xPix(xd: GPStoX(lat: currentField!.POI![$0].lat, lon: currentField!.POI![$0].long),
+//                                          width: self.width),
+//                                  y: yPix(yd: GPStoY(lat: currentField!.POI![$0].lat, lon: currentField!.POI![$0].long), height: self.height))
+//                }
+//            }
+         }
     }
 }

@@ -24,6 +24,8 @@ class Telem: ObservableObject {
     @Published var BLEperipherals: [String] = []
     @Published var BLEUUIDs: [String] = []
     @Published var BLEUserData: Bool = true
+    @Published var iPadLat: Double = 0
+    @Published var iPadLon: Double = 0
 }
 
 
@@ -124,7 +126,7 @@ func updateIncomingData () {
 private func readXYP(val: String) {
     var tx: Double
     var ty: Double
-
+    let xrange:[Double] = [1500, 3000, 6000]
     let xyPos = val.components(separatedBy: "$")
 
     if xyPos.count == 2 {
@@ -146,13 +148,13 @@ private func readXYP(val: String) {
         xp.append(tx)
         yp.append(ty)
         
-        if (currentField != nil) && (currentImageIndex != nil) {
-            let xr = currentField!.images[currentImageIndex!].xrange/2
-            let yr = currentField!.images[currentImageIndex!].xrange/8
+        if activeField.imageIdx >= 0 {
+            let xr = xrange[activeField.imageIdx]/2
+            let yr = xrange[activeField.imageIdx]/8
             
             if (tx > xr) || (tx < -xr) || (ty > 3*yr) || (ty < -yr) {
-                if currentImageIndex! + 1 < currentField!.images.count {
-                    currentImageIndex = currentImageIndex! + 1
+                if activeField.imageIdx + 1 < xrange.count {
+                    activeField.imageIdx = activeField.imageIdx + 1
                 }
             }
         }

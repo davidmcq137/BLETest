@@ -40,6 +40,21 @@ struct ContentView: View {
                         Text("BLE Devices")
                     }
             }.tag(3)
+            JAFOAddFields()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "4.circle")
+                        Text("New Fields")
+                    }
+            }.tag(4)
+            JAFOListFields()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "5.circle")
+                        Text("List Fields")
+                    }
+            }.tag(5)
+            
         }.background(SwiftUI.Color.black).edgesIgnoringSafeArea(.all)
     }
 }

@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B3C844223DF810A00B0EB85 /* JAFOAddFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C844123DF810A00B0EB85 /* JAFOAddFields.swift */; };
+		7B3C844523DF81F000B0EB85 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B3C844423DF81F000B0EB85 /* KeychainSwift */; };
+		7B3C844723DFD68700B0EB85 /* JAFOListFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C844623DFD68700B0EB85 /* JAFOListFields.swift */; };
+		7B3C844E23E089F400B0EB85 /* FlyingFields+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C844C23E089F400B0EB85 /* FlyingFields+CoreDataClass.swift */; };
+		7B3C844F23E089F400B0EB85 /* FlyingFields+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C844D23E089F400B0EB85 /* FlyingFields+CoreDataProperties.swift */; };
 		7B4BB43A23CC15190008C02A /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4BB43923CC15190008C02A /* ProgressBar.swift */; };
 		7B4BB43C23CC166C0008C02A /* findField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4BB43B23CC166C0008C02A /* findField.swift */; };
 		7B4BB43E23CCA8CD0008C02A /* fieldImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4BB43D23CCA8CC0008C02A /* fieldImage.swift */; };
@@ -53,6 +58,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B3C844123DF810A00B0EB85 /* JAFOAddFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JAFOAddFields.swift; sourceTree = "<group>"; };
+		7B3C844623DFD68700B0EB85 /* JAFOListFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JAFOListFields.swift; sourceTree = "<group>"; };
+		7B3C844C23E089F400B0EB85 /* FlyingFields+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlyingFields+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7B3C844D23E089F400B0EB85 /* FlyingFields+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlyingFields+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7B4BB43923CC15190008C02A /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		7B4BB43B23CC166C0008C02A /* findField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = findField.swift; sourceTree = "<group>"; };
 		7B4BB43D23CCA8CC0008C02A /* fieldImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fieldImage.swift; sourceTree = "<group>"; };
@@ -92,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B3C844523DF81F000B0EB85 /* KeychainSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +125,8 @@
 		7B57601D23CA64E300656D97 = {
 			isa = PBXGroup;
 			children = (
+				7B3C844C23E089F400B0EB85 /* FlyingFields+CoreDataClass.swift */,
+				7B3C844D23E089F400B0EB85 /* FlyingFields+CoreDataProperties.swift */,
 				7B6AF9B023D6C2660009E971 /* Default-568h@2x.png */,
 				7B57602823CA64E300656D97 /* JAFO-SwiftUI */,
 				7B57604223CA64E900656D97 /* JAFO-SwiftUITests */,
@@ -141,7 +153,9 @@
 				7B57606023CA6DE300656D97 /* UUIDKey.swift */,
 				7B57602B23CA64E300656D97 /* SceneDelegate.swift */,
 				7BCC386223D4E23800B23DFD /* JAFOMain.swift */,
+				7B3C844623DFD68700B0EB85 /* JAFOListFields.swift */,
 				7B57603023CA64E300656D97 /* ContentView.swift */,
+				7B3C844123DF810A00B0EB85 /* JAFOAddFields.swift */,
 				7B85D99223D2BC6C00DE33BC /* updateIncomingData.swift */,
 				7BCC386A23D5635C00B23DFD /* AlertView.swift */,
 				7BCC386623D4F70E00B23DFD /* JAFOMapOnly.swift */,
@@ -206,6 +220,9 @@
 			dependencies = (
 			);
 			name = "JAFO-SwiftUI";
+			packageProductDependencies = (
+				7B3C844423DF81F000B0EB85 /* KeychainSwift */,
+			);
 			productName = BLETest;
 			productReference = 7B57602623CA64E300656D97 /* JAFO.app */;
 			productType = "com.apple.product-type.application";
@@ -278,6 +295,9 @@
 				Base,
 			);
 			mainGroup = 7B57601D23CA64E300656D97;
+			packageReferences = (
+				7B3C844323DF81F000B0EB85 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+			);
 			productRefGroup = 7B57602723CA64E300656D97 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -324,9 +344,11 @@
 			files = (
 				7BCC386723D4F70E00B23DFD /* JAFOMapOnly.swift in Sources */,
 				7B4BB44023CCB31D0008C02A /* fieldAnnotation.swift in Sources */,
+				7B3C844723DFD68700B0EB85 /* JAFOListFields.swift in Sources */,
 				7B57606123CA6DE400656D97 /* UUIDKey.swift in Sources */,
 				7B4BB43A23CC15190008C02A /* ProgressBar.swift in Sources */,
 				7B4BB43E23CCA8CD0008C02A /* fieldImage.swift in Sources */,
+				7B3C844E23E089F400B0EB85 /* FlyingFields+CoreDataClass.swift in Sources */,
 				7BCC386B23D5635C00B23DFD /* AlertView.swift in Sources */,
 				7B4BB43C23CC166C0008C02A /* findField.swift in Sources */,
 				7B57602A23CA64E300656D97 /* AppDelegate.swift in Sources */,
@@ -336,8 +358,10 @@
 				7B4BB44223CCC8030008C02A /* Gauge.swift in Sources */,
 				7B85D99523D3E5EE00DE33BC /* BLELocation.swift in Sources */,
 				7BCC386123D4DD0B00B23DFD /* FieldMap.swift in Sources */,
+				7B3C844223DF810A00B0EB85 /* JAFOAddFields.swift in Sources */,
 				7B57603123CA64E300656D97 /* ContentView.swift in Sources */,
 				7BCC386923D4F78200B23DFD /* JAFODeviceList.swift in Sources */,
+				7B3C844F23E089F400B0EB85 /* FlyingFields+CoreDataProperties.swift in Sources */,
 				7BCC386323D4E23800B23DFD /* JAFOMain.swift in Sources */,
 				7B57602C23CA64E300656D97 /* SceneDelegate.swift in Sources */,
 				7B85D99323D2BC6C00DE33BC /* updateIncomingData.swift in Sources */,
@@ -666,6 +690,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7B3C844323DF81F000B0EB85 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7B3C844423DF81F000B0EB85 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B3C844323DF81F000B0EB85 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		7B57602D23CA64E300656D97 /* BLETest.xcdatamodeld */ = {
