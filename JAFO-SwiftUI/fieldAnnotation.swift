@@ -29,8 +29,12 @@ struct fieldAnnotation: View {
             annot = "No Field Selected"
         }
         
-        return Text(annot).multilineTextAlignment(.center)
-            .font(.body)
-            .foregroundColor(Color.yellow)
+        return
+            VStack {
+                Text(annot).multilineTextAlignment(.center)
+                    .font(.body)
+                    .foregroundColor(Color.yellow)
+                Image(systemName: "location.north.fill").rotationEffect(Angle(degrees: activeField.truedir)).foregroundColor(Color.yellow).font(.system(size: 25))
+        }
     }
 }

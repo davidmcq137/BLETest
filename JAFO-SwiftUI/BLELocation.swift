@@ -31,6 +31,8 @@ var writeData: String = ""
 var timer = Timer()
 var characteristics = [String : CBCharacteristic]()
 
+var horizontalAccuracyGPS: Double?
+
 class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate, CBPeripheralDelegate, CLLocationManagerDelegate {
     
     var centralManager: CBCentralManager!
@@ -134,8 +136,18 @@ class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate
 
             tele.iPadLat = location.coordinate.latitude
             tele.iPadLon = location.coordinate.longitude
+            let hAcc = location.horizontalAccuracy
+            horizontalAccuracyGPS = hAcc
+            let vAcc = location.verticalAccuracy
+            print("hacc, vacc:", hAcc, vAcc)
             //tele.xxxlat = iPadLat
             //tele.xxxlon = iPadLon
+            if hAcc > 10.0 {
+                print("requesting location again")
+                self.manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                self.manager.requestLocation()
+                //return
+            }
             
             _ = findField(lat: tele.iPadLat, lon: tele.iPadLon)
             if activeField.imageIdx >= 0 {

@@ -59,48 +59,64 @@ struct JAFOAddFields: View {
                             Text("Full name:").font(.callout).bold()
                             TextField("Enter full name", text: self.$longName).textFieldStyle(RoundedBorderTextFieldStyle()).frame(width: 200, height: 20)
                         }.padding()
-                        Button(action: {
-                            print("save Action")
-                            let field = FlyingFields(context: self.moc)
-                            field.id = UUID()
-                            field.images = [self.shortName + "1500", self.shortName + "3000", self.shortName + "6000"]
-                            field.latitude = self.gMapsLat
-                            field.longitude = self.gMapsLon
-                            field.shortname = self.shortName
-                            field.longname = self.longName
-                            field.runwaywidth = self.rwyWidth * self.ftPerPixel1500
-                            field.runwaylength = self.rwyLength * self.ftPerPixel1500
-                            //field.truedir = self.xxx
-                            saveFieldFiles(shortName: self.shortName, imageArray: self.cropImage)
-                            do {
-                                try self.moc.save()
-                            } catch {
-                                // handle the Core Data error
+                        HStack {
+                            Button(action: {
+                                self.cropImage = nil
+                            }){
+                                Text("Cancel")
+                                .font(.headline)
+                                .padding()
+                                .background(Color.secondary)
+                                .cornerRadius(40)
+                                    .foregroundColor(Color.primary)
+                                .padding()
                             }
+                            Button(action: {
+                                print("save Action")
+                                let field = FlyingFields(context: self.moc)
+                                field.id = UUID()
+                                field.images = [self.shortName + "1500", self.shortName + "3000", self.shortName + "6000"]
+                                field.latitude = self.gMapsLat
+                                field.longitude = self.gMapsLon
+                                field.shortname = self.shortName
+                                field.longname = self.longName
+                                field.runwaywidth = self.rwyWidth * self.ftPerPixel1500
+                                field.runwaylength = self.rwyLength * self.ftPerPixel1500
+                                field.truedir = self.rotateState
+                                saveFieldFiles(shortName: self.shortName, imageArray: self.cropImage)
+                                do {
+                                    try self.moc.save()
+                                } catch {
+                                    // handle the Core Data error
+                                }
+                                
+                                // now reset back to initial screen to create another field
+                                // do we have to zero out all the other @State variables?
+                                self.cropImage = nil
+                                self.fieldImage = nil
+                                
+                                // go see if this is the field we should go to now...
+                                
+                                _ = findField(lat: field.latitude, lon: field.longitude)
+                                
+                            }){
+                                Text("Save JAFO Images")
+                            }
+                            .padding()
+                            .background(Color.secondary)
+                            .cornerRadius(40)
+                            .foregroundColor(Color.primary)
+                            .padding()
+                    
                             
-                            // now reset back to initial screen to create another field
-                            // do we have to zero out all the other @State variables?
-                            self.cropImage = nil
-                            self.fieldImage = nil
-                            
-                            // go see if this is the field we should go to now...
-                            
-                            _ = findField(lat: field.latitude, lon: field.longitude)
-                            
-                        }){
-                            Text("Save JAFO Images")
                         }
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(40)
-                        .foregroundColor(.yellow)
-                        .padding()
                         
                         ZStack {
-                            Image(uiImage: self.cropImage[0]).resizable().clipped().aspectRatio(2, contentMode: .fit).border(Color.blue)
-                            Text("Cropped \(gR.size.width), \(gR.size.height)")
+                            Image(uiImage: self.cropImage[0]).resizable().clipped().aspectRatio(2, contentMode: .fit).border(Color.primary)
+                            Image(systemName: "location.north.fill").rotationEffect(Angle(degrees: self.rotateState)).foregroundColor(Color.yellow).font(.system(size: 25)).position(x: gR.size.width/2, y: gR.size.height / 4)
+                            //Text("Cropped \(gR.size.width), \(gR.size.height)")
                             Circle().position(x: 5, y: 5).frame(width:10, height:10).foregroundColor(Color.red)
-                            Circle().position(x: 5, y: gR.size.width/8+5).frame(width:10, height:10).foregroundColor(Color.blue)
+                            Circle().position(x: 5, y: gR.size.width/8+5).frame(width:10, height:10).foregroundColor(Color.primary)
                             //draw a runway that should overlay the one on the image .. coded for 1500 foot scale
                             Rectangle()
                                 .stroke(lineWidth: CGFloat(2))
@@ -112,20 +128,38 @@ struct JAFOAddFields: View {
                 }
             } else {
                 VStack {
-                    HStack {
-                        Text("Current Latitude: \(tel.iPadLat)")
-                        Text("Current Longitude: \(tel.iPadLon)")
+                    if fieldImage == nil {
+                        VStack {
+                        HStack {
+                            Text("Current Latitude: \(tel.iPadLat)")
+                            Text("Current Longitude: \(tel.iPadLon)")
+                        }
+                            Text("Accuracy: \(Int(horizontalAccuracyGPS ?? 0.0), specifier: "%d") m")
+                        }
+                        HStack {
+                            Text("Latitude:").font(.callout).bold()
+                            TextField("Enter latitude", text: self.$fieldLat).textFieldStyle(RoundedBorderTextFieldStyle()).frame(width: 200, height: 20)
+                            
+                            Text("Longitude:").font(.callout).bold()
+                            TextField("Enter Longitude", text: self.$fieldLon).textFieldStyle(RoundedBorderTextFieldStyle()).frame(width: 200, height: 20)
+                        }.padding()
+                    } else {
+                        HStack {
+                            Text("Current Latitude: \(tel.iPadLat)")
+                                .padding(5)
+                                .background(Color.secondary)
+                                .cornerRadius(.infinity)
+                                .padding()
+                            Text("Current Longitude: \(tel.iPadLon)")
+                                .padding(5)
+                                .background(Color.secondary)
+                                .cornerRadius(.infinity)
+                                .padding()
+                        }.padding()
                     }
-                    HStack {
-                        Text("Latitude:").font(.callout).bold()
-                        TextField("Enter latitude", text: self.$fieldLat).textFieldStyle(RoundedBorderTextFieldStyle()).frame(width: 200, height: 20)
-                        
-                        Text("Longitude:").font(.callout).bold()
-                        TextField("Enter Longitude", text: self.$fieldLon).textFieldStyle(RoundedBorderTextFieldStyle()).frame(width: 200, height: 20)
-                    }.padding()
                     if fieldImage != nil {
-                        ZStack (alignment: .bottom){
-                            ZStack {
+                        ZStack (alignment: .top){
+                            ZStack () {
                                 Image(uiImage: self.$fieldImage.wrappedValue!)
                                     .clipShape(Circle())
                                     .rotationEffect(Angle(degrees: self.rotateState))
@@ -147,10 +181,56 @@ struct JAFOAddFields: View {
                                     .foregroundColor(Color.yellow)
                             }
                             VStack {
-                                Text("Rot: \(Double($rotateState.wrappedValue), specifier: "%.2f"), Wid: \(ftPerPixel1500 * Double($rwyWidth.wrappedValue), specifier: "%.2f"), Len: \(ftPerPixel1500*Double($rwyLength.wrappedValue),specifier: "%.2f")").foregroundColor(Color.yellow)
-                                Text("Xoff: \(ftPerPixel1500 * Double($rwyXoffset.wrappedValue),specifier: "%.2f"), Yoff: \(ftPerPixel1500 * Double($rwyYoffset.wrappedValue),specifier: "%.2f")").foregroundColor(Color.yellow).padding(.bottom, 40)
+                                Text("Rotation: \(Double($rotateState.wrappedValue), specifier: "%.2f")")
+                                    .padding(5)
+                                    .background(Color.secondary)
+                                    .cornerRadius(.infinity)
+                                Image(systemName: "location.north.fill").rotationEffect(Angle(degrees: self.rotateState)).foregroundColor(Color.yellow).font(.system(size: 25))
                             }
+                            VStack {
+                                Spacer()
+                                HStack{
+                                    VStack {
+                                        Slider(value: $rwyYoffset, in: -100...100, step: 1)
+                                            .background(Color.secondary)
+                                            .cornerRadius(.infinity)
+                                            .accentColor(Color.yellow)
+                                            .padding()
+                                        Text("Runway Y offset \(Int(self.rwyYoffset * ftPerPixel1500), specifier: "%d") ft")
+                                    }
+                                    VStack {
+                                        Slider(value: $rwyXoffset, in: -100...100, step: 1)
+                                            .background(Color.secondary)
+                                            .cornerRadius(.infinity)
+                                            .accentColor(Color.yellow)
+                                            .padding()
+                                        Text("Runway X offset \(Int(self.rwyXoffset * ftPerPixel1500), specifier: "%d") ft")
+                                    }
+                                }
+                                HStack {
+                                    VStack {
+                                        Slider(value: $rwyLength, in: 0...700, step: 2)
+                                            .background(Color.secondary)
+                                            .cornerRadius(.infinity)
+                                            .accentColor(Color.yellow)
+                                            .padding()
+                                        Text("Runway Length \(Int(self.rwyLength * ftPerPixel1500), specifier: "%d") ft")
+                                    }
+                                    VStack {
+                                        Slider(value: $rwyWidth, in: 0...100, step: 1)
+                                            .background(Color.secondary)
+                                            .cornerRadius(.infinity)
+                                            .accentColor(Color.yellow)
+                                            .padding()
+                                        Text("Runway Width \(Int(self.rwyWidth * ftPerPixel1500), specifier: "%d") ft")
+                                    }
+                                }
+                                //Text("Rot: \(Double($rotateState.wrappedValue), specifier: "%.2f"), Wid: \(ftPerPixel1500 * Double($rwyWidth.wrappedValue), specifier: "%.2f"), Len: \(ftPerPixel1500*Double($rwyLength.wrappedValue),specifier: "%.2f")").foregroundColor(Color.yellow)
+                                //Text("Xoff: \(ftPerPixel1500 * Double($rwyXoffset.wrappedValue),specifier: "%.2f"), Yoff: \(ftPerPixel1500 * Double($rwyYoffset.wrappedValue),specifier: "%.2f")").foregroundColor(Color.yellow).padding(.bottom, 40)
+                            }
+                        .padding()
                         }
+                        /*
                         HStack {
                             VStack {
                                 Slider(value: $rwyYoffset, in: -100...100, step: 1).frame(width: 150, height:40).padding()
@@ -169,8 +249,22 @@ struct JAFOAddFields: View {
                                 Text("Runway Width")
                             }
                         }
+                        */
                     }
                     HStack {
+                        if self.fieldImage != nil {
+                            Button( action: {
+                                self.fieldImage = nil
+                            }){
+                                Text("Cancel")
+                                    .font(.headline)
+                                    .padding()
+                                    .background(Color.secondary)
+                                    .cornerRadius(40)
+                                    .foregroundColor(Color.primary)
+                                    .padding()
+                            }
+                        } else {
                         Button(action: {
                             print("use current latlon")
                             self.fieldLat = String(self.tel.iPadLat)
@@ -179,9 +273,9 @@ struct JAFOAddFields: View {
                             Text("Use current lat/lon")
                         }
                         .padding()
-                        .background(Color.blue)
+                        .background(Color.secondary)
                         .cornerRadius(40)
-                        .foregroundColor(.yellow)
+                        .foregroundColor(Color.primary)
                         .padding()
                         
                         Button(action: {
@@ -200,47 +294,49 @@ struct JAFOAddFields: View {
                                 print("lat or lon fields blank?")
                             }
                         }) {
-                            Text("Get Google Maps Image")
+                            Text("Get GMaps Image")
                         }
                         .padding()
-                        .background(Color.blue)
+                        .background(Color.secondary)
                         .cornerRadius(40)
-                        .foregroundColor(.yellow)
+                        .foregroundColor(Color.primary)
                         .padding()
                         
-                        
-                        Button(action: {
-                            //recompute lat,lon for center of runway, re-request image at those coords
-                            let rotR = self.rotateState * Double.pi / 180.0
-                            let rE = 21220539.7
-                            let dx = self.ftPerPixel1500 * Double(self.rwyXoffset)
-                            let dy = -self.ftPerPixel1500 * Double(self.rwyYoffset)
-                            //compute runway center point in original image coords
-                            let rdx = dx * cos(rotR) - dy * sin(rotR)
-                            let rdy = dx * sin(rotR) + dy * cos(rotR)
-                            //translate lat lon to center of runway
-                            let dlon = (180.0 / Double.pi) * rdx / (rE * cos(self.gMapsLat * Double.pi / 180))
-                            let dlat = (180.0 / Double.pi) * rdy / rE
-                            //offset now zero since lat lon point at center of runway
-                            self.rwyXoffset = 0.0
-                            self.rwyYoffset = 0.0
-                            self.gMapsLat = self.gMapsLat + dlat
-                            self.gMapsLon = self.gMapsLon + dlon
-                            print("Calling saveFieldImages")
-                            self.cropImage = createFieldImages(rotation: self.rotateState, Lat: self.gMapsLat, Lon: self.gMapsLon, rLen: self.rwyLength, rWid: self.rwyWidth)
-                            print("back from sFI")
-                        }) {
-                            Text("Create cropped/rotated image")
-                                .padding()
-                                .background(Color.blue)
-                                .cornerRadius(40)
-                                .foregroundColor(.yellow)
-                                .padding()
+                        }
+                        if self.fieldImage != nil {
+                            Button(action: {
+                                //recompute lat,lon for center of runway, re-request image at those coords
+                                let rotR = self.rotateState * Double.pi / 180.0
+                                let rE = 21220539.7
+                                let dx = self.ftPerPixel1500 * Double(self.rwyXoffset)
+                                let dy = -self.ftPerPixel1500 * Double(self.rwyYoffset)
+                                //compute runway center point in original image coords
+                                let rdx = dx * cos(rotR) - dy * sin(rotR)
+                                let rdy = dx * sin(rotR) + dy * cos(rotR)
+                                //translate lat lon to center of runway
+                                let dlon = (180.0 / Double.pi) * rdx / (rE * cos(self.gMapsLat * Double.pi / 180))
+                                let dlat = (180.0 / Double.pi) * rdy / rE
+                                //offset now zero since lat lon point at center of runway
+                                self.rwyXoffset = 0.0
+                                self.rwyYoffset = 0.0
+                                self.gMapsLat = self.gMapsLat + dlat
+                                self.gMapsLon = self.gMapsLon + dlon
+                                print("Calling saveFieldImages")
+                                self.cropImage = createFieldImages(rotation: self.rotateState, Lat: self.gMapsLat, Lon: self.gMapsLon, rLen: self.rwyLength, rWid: self.rwyWidth)
+                                print("back from sFI")
+                            }) {
+                                Text("Create JAFO images")
+                                    .padding()
+                                    .background(Color.secondary)
+                                    .cornerRadius(40)
+                                    .foregroundColor(Color.primary)
+                                    .padding()
+                            }
                         }
                     }
                 }
             }
-        }
+        }//.background(SwiftUI.Color.black).edgesIgnoringSafeArea(.top)
     }
 }
 
