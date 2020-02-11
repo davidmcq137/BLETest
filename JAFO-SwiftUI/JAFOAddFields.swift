@@ -277,7 +277,7 @@ struct JAFOAddFields: View {
                         .cornerRadius(40)
                         .foregroundColor(Color.primary)
                         .padding()
-                        
+
                         Button(action: {
                             print("getting image")
                             if self.fieldLat != "" && self.fieldLon != "" {

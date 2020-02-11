@@ -32,6 +32,7 @@ var timer = Timer()
 var characteristics = [String : CBCharacteristic]()
 
 var horizontalAccuracyGPS: Double?
+var foundFieldOnce: Bool = false
 
 class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate, CBPeripheralDelegate, CLLocationManagerDelegate {
     
@@ -149,10 +150,13 @@ class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate
                 //return
             }
             
-            _ = findField(lat: tele.iPadLat, lon: tele.iPadLon)
+            if foundFieldOnce == false {
+                _ = findField(lat: tele.iPadLat, lon: tele.iPadLon)
+            }
             if activeField.imageIdx >= 0 {
                 print("We are at a known field!")
                 print ("shortname: \(String(activeField.shortname))")
+                foundFieldOnce = true
             }
         }
     }
