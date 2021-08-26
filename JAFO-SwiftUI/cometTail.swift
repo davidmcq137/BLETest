@@ -11,7 +11,7 @@ import Combine
 
 var lat0: Double = 0
 var lon0: Double = 0
-var Re: Double = 0
+var Re: Double = 21220539.7
 var coslat0: Double = 0
 var td: Double = 0
 var xr: Double = 0
@@ -23,8 +23,8 @@ let MAXTABLE: Int = 16
 let MAXBEZIER: Int = 8
 let xrange: [Double] = [1500, 3000, 6000]
 
-var xp: [Double] = Array(repeating: 0.0, count: MAXTABLE+1)
-var yp: [Double] = Array(repeating: 0.0, count: MAXTABLE+1)
+var xp: [Double] = Array(repeating: 0.001, count: MAXTABLE+1)
+var yp: [Double] = Array(repeating: 0.002, count: MAXTABLE+1)
 
 
 var Bxp: [Double]  = Array(repeating: 0.0, count: MAXBEZIER+1)
@@ -198,10 +198,18 @@ func GPStoPixel (lat: Double, lon: Double) -> (Double, Double)  {
 func GPStoXY (lat: Double, lon: Double) -> (Double, Double)  {
     //print("Re, lat0, lon0, xr, toXpix, toYpix: \(Re), \(lat0), \(lon0), \(xr), \(toXpix), \(toYpix)")
     //print("coslat0, td, sw: \(coslat0), \(td), \(sw)")
+    lon0 = activeField.longitude
+    lat0 = activeField.latitude
+    //print("lat, lon, lat0, lon0: \(lat) \(lon) \(lat0) \(lon0)")
+    coslat0 = cos(lat0 * Double.pi / 180.0)
     var px = Re * (lon-lon0) * coslat0 * Double.pi / 180.0
     var py = Re * (lat-lat0) * Double.pi / 180.0
     
+    td = 214.0 //TODO - find out why correct TD not being stored!
+    
+    //print("pre rot - px,py: \(px), \(py)")
     (px, py) = rotateXY(x: px, y:py, rotation: (td - 270) * Double.pi / 180.0)
+    //print("post rot - px,py: \(px), \(py)")
     
     return (px, py)
 }
@@ -286,8 +294,8 @@ func computeBezier(numT: Int) {
     
     for j in 0 ... numT {
         t = Double(j) / Double(numT)
-        px = 0
-        py = 0
+        px = 0.0
+        py = 0.0
         ti = 1 // first loop t^i = 0^0 which lua says is 1
         for i in 0 ... n {
             //print("n, i, t, oti: \(n), \(i), \(t), \(oti)")
@@ -295,12 +303,22 @@ func computeBezier(numT: Int) {
             //print("n, i, t, oti: \(n), \(i), \(t), \(oti)")
 
             bn = binom(n: n, kk: i) * ti * oti
+            //print("xp[i], yp[i]: \(xp[i]), \(yp[i])")
+            
+            //print("px, py, bn: \(px), \(py), \(bn)")
+            //if xp[i] == 0.0 || yp[i] == 0.0 {
+                //print("ZERO in BEZIER: i, xp[i], yp[i], \(i), \(xp[i]), \(yp[i])")
+            //}
             px = px + bn * xp[i]
             py = py + bn * yp[i]
             ti = ti * t
         }
         //print("j, bp: \(j), \(px), \(py)")
         
+        //if px == 0.001 || py == 0.002 {
+          //  print("px, py: \(px), \(py)")
+          //  print("zero")
+        //}
         Bxp[j] = px
         Byp[j] = py
         

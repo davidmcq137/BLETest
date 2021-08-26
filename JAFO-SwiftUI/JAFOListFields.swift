@@ -31,6 +31,7 @@ struct JAFOListFields: View {
                             Text(field.longname ?? "unk")
                             Text("(" + (field.shortname ?? "unk") + ")")
                             Spacer()
+                            Text("Td: \(field.truedir)")
                             Text("Lon: \(field.longitude)")
                             Text("Lat: \(field.latitude)")
                             //Text("\(field.images?[0] ?? "No image").png")

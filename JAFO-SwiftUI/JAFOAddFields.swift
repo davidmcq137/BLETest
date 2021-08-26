@@ -30,6 +30,7 @@ struct JAFOAddFields: View {
     @State private var fieldImage: UIImage!
     @State private var gMapsLat: Double = 0.0
     @State private var gMapsLon: Double = 0.0
+    @State private var rotationEnd: Double = 0
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var tel: Telem
     
@@ -160,12 +161,17 @@ struct JAFOAddFields: View {
                     if fieldImage != nil {
                         ZStack (alignment: .top){
                             ZStack () {
-                                Image(uiImage: self.$fieldImage.wrappedValue!)
+                                Image(uiImage: self.fieldImage!)
                                     .clipShape(Circle())
-                                    .rotationEffect(Angle(degrees: self.rotateState))
+                                    .rotationEffect(Angle(degrees: self.rotateState))// + self.rotationEnd))
                                     .gesture(RotationGesture()
                                         .onChanged { value in
-                                            self.rotateState = value.degrees
+                                            self.rotateState = value.degrees + self.rotationEnd
+                                            print("onchanged: \(value.degrees + self.rotationEnd)")
+                                    }
+                                    .onEnded { value in
+                                        print("value: \(value.degrees)")
+                                        self.rotationEnd = value.degrees
                                         }
                                 )
                                 Circle().position(x: 5, y: 5).frame(width:10, height:10).foregroundColor(Color.red)
@@ -181,7 +187,7 @@ struct JAFOAddFields: View {
                                     .foregroundColor(Color.yellow)
                             }
                             VStack {
-                                Text("Rotation: \(Double($rotateState.wrappedValue), specifier: "%.2f")")
+                                Text("Rotation: \(Double(rotateState), specifier: "%.2f")")
                                     .padding(5)
                                     .background(Color.secondary)
                                     .cornerRadius(.infinity)
@@ -306,7 +312,7 @@ struct JAFOAddFields: View {
                         if self.fieldImage != nil {
                             Button(action: {
                                 //recompute lat,lon for center of runway, re-request image at those coords
-                                let rotR = self.rotateState * Double.pi / 180.0
+                                let rotR = (self.rotateState) * Double.pi / 180.0
                                 let rE = 21220539.7
                                 let dx = self.ftPerPixel1500 * Double(self.rwyXoffset)
                                 let dy = -self.ftPerPixel1500 * Double(self.rwyYoffset)

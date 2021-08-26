@@ -128,8 +128,8 @@ class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate
             print("Lon: \(location.coordinate.longitude)")
             
             //print("DEBUG: Inserting BDS")
-            //iPadLat = 41.339733//location.coordinate.latitude
-            //iPadLon = -74.431618//location.coordinate.longitude
+            //tele.iPadLat = 41.339733//location.coordinate.latitude
+            //tele.iPadLon = -74.431618//location.coordinate.longitude
             
             //print("DEBUG: Inserting GA Jets")
             //iPadLat = 33.1372    //location.coordinate.latitude
@@ -137,6 +137,7 @@ class BLELocation:  UIResponder, UIApplicationDelegate, CBCentralManagerDelegate
 
             tele.iPadLat = location.coordinate.latitude
             tele.iPadLon = location.coordinate.longitude
+            
             let hAcc = location.horizontalAccuracy
             horizontalAccuracyGPS = hAcc
             let vAcc = location.verticalAccuracy

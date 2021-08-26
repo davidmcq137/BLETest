@@ -27,8 +27,8 @@ struct FieldMap: View {
                 bezPath(idx: activeField.imageIdx, xd: self.tel.currentXd, yd: self.tel.currentYd, width: Double(gRR.size.width), height: Double(gRR.size.width / 2)).foregroundColor(.yellow)//.border(Color.yellow)
                 //Text("\r\n\r\nwidth:\(gRR.size.width) height: \(gRR.size.height)").foregroundColor(.yellow)
                 HStack (spacing: 600) {
-                    drawTape(Val: self.tel.prevAlt, side: "Left", title:"Altitude").frame(width: 75, height: 330).padding(.top)
-                    drawTape(Val: self.tel.prevSpd, side: "Right", title: "Airspeed").frame(width: 75, height: 330).padding(.top)
+                    drawTape(Val: self.tel.prevAlt, side: "Left", title:"Alt").frame(width: 75, height: 330).padding(.top)
+                    drawTape(Val: self.tel.prevSpd, side: "Right", title: "Spd").frame(width: 75, height: 330).padding(.top)
                 }
             }
         }

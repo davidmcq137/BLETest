@@ -28,7 +28,7 @@ class Telem: ObservableObject {
     @Published var iPadLon: Double = 0
 }
 
-
+var lastW: String = ""
 var icount: Int = 0
 
 func updateIncomingData () {
@@ -98,6 +98,7 @@ func updateIncomingData () {
         } else if valName == "XYP" {
             readXYP(val: valValue)
         } else if let vf = Double(valueArray[1]) {
+            //print("valName, vf: \(valName), \(vf)")
             switch valName {
             case "Alt":
                 tele.prevAlt = vf
@@ -127,6 +128,8 @@ private func readXYP(val: String) {
     var tx: Double
     var ty: Double
     let xrange:[Double] = [1500, 3000, 6000]
+    
+    return
     let xyPos = val.components(separatedBy: "$")
 
     if xyPos.count == 2 {
@@ -134,10 +137,17 @@ private func readXYP(val: String) {
         tx = Double(xyPos[0]) ?? 0.0
         ty = Double(xyPos[1]) ?? 0.0
 
+        if tx == 0.0 || ty == 0.0 {
+            print("ZERO on Input: tx, ty: \(tx), \(ty)")
+        }
+        //print("tx, ty: \(tx), \(ty)")
         tele.currentXd = tx
         tele.currentYd = ty
 
         for i in 1 ..< MAXTABLE {
+            if xp[i] == 0.0 || yp[i] == 0.0 {
+                print("ZERO on Shift: tx, ty: \(i), \(xp[i]), \(yp[i])")
+            }
             xp[i-1] = xp[i]
             yp[i-1] = yp[i]
         }
@@ -164,6 +174,8 @@ private func readXYP(val: String) {
         
         //print("Bxp[0], Byp[0]: \(Bxp[0]), \(Byp[0])")
         
+    } else {
+        print("bad format on XYP")
     }
 }
 
@@ -171,26 +183,48 @@ private func readXYP(val: String) {
 // This func has not been ported .. probably won't work without a going-over...
 
 private func readGPS(val: String) {
+
+    let xrange:[Double] = [1500, 3000, 6000]
+    print("*********** readGPS ******************************")
+    print("lat0 lon0: \(activeField.latitude), \(activeField.longitude)")
+    
+    
     let latlon = val.components(separatedBy: "$")
     if latlon.count == 2 {
         if let dlat = Double(latlon[0]), let dlon = Double(latlon[1]) {
-            for i in 1 ..< MAXTABLE {
-                xp[i-1] = xp[i]
-                yp[i-1] = yp[i]
-            //    print("i,x,y: \(i), \(xp[i-1]), \(yp[i-1])")
-            }
+            print("after if let - lat, lon: \(dlat), \(dlon)")
             var tx: Double
             var ty: Double
             
             (tx, ty) = GPStoXY(lat: dlat, lon: dlon)
+
+            print("back from GPStoXY: \(tx), \(ty)")
+            tele.currentXd = tx
+            tele.currentYd = ty
+
+            for i in 1 ..< MAXTABLE {
+                xp[i-1] = xp[i]
+                yp[i-1] = yp[i]
+                //    print("i,x,y: \(i), \(xp[i-1]), \(yp[i-1])")
+            }
+
             xp.remove(at: 0)
             yp.remove(at: 0)
             xp.append(tx)
             yp.append(ty)
             
-            var xx: Double
-            var yy: Double
+            if activeField.imageIdx >= 0 {
+                let xr = xrange[activeField.imageIdx]/2
+                let yr = xrange[activeField.imageIdx]/8
+                
+                if (tx > xr) || (tx < -xr) || (ty > 3*yr) || (ty < -yr) {
+                    if activeField.imageIdx + 1 < xrange.count {
+                        activeField.imageIdx = activeField.imageIdx + 1
+                    }
+                }
+            }
             
+
             //(xx, yy) = XYtoPixel(px: xp.last!, py: yp.last!)
             
             //let rotationAngle: Double = fslope(x: xp, y: yp, n: MAXTABLE, ymult: -1) // mult -1 since rotation is in pixel space, data in xy space and y is inverted between them
@@ -198,20 +232,6 @@ private func readGPS(val: String) {
             
             computeBezier(numT: MAXBEZIER)
             //cometBezier.removeAllPoints()
-            
-            for i in 0 ... MAXBEZIER {
-                var bx: Double
-                var by: Double
-                //(bx, by) = XYtoPixel(px: Bxp[i], py: Byp[i])
-                if i == 0 || i == MAXBEZIER {  //first point
-                    //cometBezier.move(to: CGPoint(x: bx, y: by))
-                } else {
-                    //cometBezier.addLine(to: CGPoint(x: bx, y: by))
-                }
-            }
-            //cometLayer.path = cometBezier.cgPath
-            //self.view.layer.addSublayer(cometLayer)
-            
         }
     } else {
         print("bad lat lon decode")
@@ -220,6 +240,11 @@ private func readGPS(val: String) {
 
 func writeValue(data: String){
     //print("in wV string: \(data)")
+    if data == lastW {
+        //print("same, returning")
+        return
+    }
+    //let encap: String = "(" + data + ")"
     let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
     //change the "data" to valueString
     if let blePeripheral = blePeripheral{
@@ -227,6 +252,7 @@ func writeValue(data: String){
             blePeripheral.writeValue(valueString!, for: txCharacteristic, type: CBCharacteristicWriteType.withResponse)
         }
     }
+    lastW = data
 }
 
 func writeCharacteristic(val: Int8){
